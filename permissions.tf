@@ -1,6 +1,6 @@
 resource "aws_lakeformation_permissions" "describe_sor" {
     principal   = var.producer_role_arn_mesh
-    permissions = ["DESCRIBE"]
+    permissions = ["DESCRIBE", "CREATE_TABLE"]
 
     database {
       name       = var.database_sor
@@ -10,7 +10,7 @@ resource "aws_lakeformation_permissions" "describe_sor" {
 
 resource "aws_lakeformation_permissions" "describe_sot" {
     principal   = var.producer_role_arn_mesh
-    permissions = ["DESCRIBE"]
+    permissions = ["DESCRIBE", "CREATE_TABLE"]
 
     database {
         name       = var.database_sot
@@ -20,7 +20,7 @@ resource "aws_lakeformation_permissions" "describe_sot" {
 
 resource "aws_lakeformation_permissions" "describe_spec" {
     principal   = var.producer_role_arn_mesh
-    permissions = ["DESCRIBE"]
+    permissions = ["DESCRIBE", "CREATE_TABLE"]
 
     database {
         name       = var.database_spec
