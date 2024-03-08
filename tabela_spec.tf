@@ -13,10 +13,10 @@ resource "aws_glue_catalog_table" "tabela_spec" {
   }
   
   storage_descriptor {
-    location       = "s3://${var.database_sot}.${var.tabela_sot}/"
+    location       = "${var.spec_s3_bucket}/${var.tabela_sot}/"
     input_format   = "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat"
     output_format  = "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat"
-    serde_info {
+    ser_de_info {
       name = var.tabela_spec
       serialization_library = "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe"
       parameters = {
