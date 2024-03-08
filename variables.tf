@@ -45,3 +45,7 @@ variable "tabela_sot" {
 variable "tabela_spec" {
   type = string
 }
+
+variable "lista_consumidores" {
+  type = list(string)
+}

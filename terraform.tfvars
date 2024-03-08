@@ -10,3 +10,15 @@ database_spec = "db_spec_banco_xis"
 tabela_sor = "produto_credito_sor"
 tabela_sot = "produto_credito_sot"
 tabela_spec = "produto_credito_spec"
+lista_consumidores = [
+    "arn:aws:iam::850202893763:user/athos_silva", 
+    "arn:aws:iam::850202893763:user/francieli_souza", 
+    "arn:aws:iam::850202893763:user/gabriel_gomes",
+    "arn:aws:iam::850202893763:user/guilherme_rodrigues",
+    "arn:aws:iam::850202893763:user/jaqueline_araujo",
+    "arn:aws:iam::850202893763:user/lucas_lima",
+    "arn:aws:iam::850202893763:user/natalia_dreher",
+    "arn:aws:iam::850202893763:user/scarlet_amaral",
+    "arn:aws:iam::850202893763:user/usuario_teste",
+    "arn:aws:iam::850202893763:user/vanessa_vieira"
+    ]

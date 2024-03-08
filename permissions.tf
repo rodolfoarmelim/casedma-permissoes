@@ -28,44 +28,86 @@ resource "aws_lakeformation_permissions" "describe_spec" {
     }
 }
 
-resource "aws_lakeformation_permissions" "database_permissions_sor" {
-  database_name = var.database_sor
-  permissions {
-    principal        = var.producer_role_arn_mesh
-    resource         = "table://${var.database_sor}.${var.tabela_sor}"
-    permissions      = ["SELECT", "INSERT", "ALTER", "DROP"]
-  }
-  permissions {
-    principal        = var.consumer_role_arn_mesh
-    resource         = "table://${var.database_sor}.${var.tabela_sor}"
-    permissions      = ["SELECT"]
+resource "aws_lakeformation_permissions" "database_permissions_sor_producer" {
+  principal = var.producer_role_arn_mesh
+  permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
+  table {
+    database_name = var.database_sor
+    name = var.tabela_sor
   }
 }
 
-resource "aws_lakeformation_permissions" "database_permissions_sot" {
-  database_name = var.database_sot
-  permissions {
-    principal        = var.producer_role_arn_mesh
-    resource         = "table://${var.database_sot}.${var.tabela_sot}"
-    permissions      = ["SELECT", "INSERT", "ALTER", "DROP"]
-  }
-  permissions {
-    principal        = var.consumer_role_arn_mesh
-    resource         = "table://${var.database_sot}.${var.tabela_sot}"
-    permissions      = ["SELECT"]
+resource "aws_lakeformation_permissions" "database_permissions_sot_producer" {
+  principal = var.producer_role_arn_mesh
+  permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
+  table {
+    database_name = var.database_sot
+    name = var.tabela_sot
   }
 }
 
-resource "aws_lakeformation_permissions" "database_permissions_spec" {
-  database_name = var.database_spec
-  permissions {
-    principal        = var.producer_role_arn_mesh
-    resource         = "table://${var.database_spec}.${var.tabela_spec}"
-    permissions      = ["SELECT", "INSERT", "ALTER", "DROP"]
+resource "aws_lakeformation_permissions" "database_permissions_spec_producer" {
+  principal = var.producer_role_arn_mesh
+  permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
+  table {
+    database_name = var.database_spec
+    name = var.tabela_spec
   }
-  permissions {
-    principal        = var.consumer_role_arn_mesh
-    resource         = "table://${var.database_spec}.${var.tabela_spec}"
-    permissions      = ["SELECT"]
+}
+
+resource "aws_lakeformation_permissions" "database_permissions_sor_producer" {
+  principal = var.producer_role_arn_mesh
+  permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
+  table {
+    database_name = var.database_sor
+    name = var.tabela_sor
+  }
+}
+
+resource "aws_lakeformation_permissions" "database_permissions_sot_producer" {
+  principal = var.producer_role_arn_mesh
+  permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
+  table {
+    database_name = var.database_sot
+    name = var.tabela_sot
+  }
+}
+
+resource "aws_lakeformation_permissions" "database_permissions_spec_producer" {
+  principal = var.producer_role_arn_mesh
+  permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
+  table {
+    database_name = var.database_spec
+    name = var.tabela_spec
+  }
+}
+
+resource "aws_lakeformation_permissions" "database_permissions_sor_consumer" {
+  for_each = toset(var.lista_consumidores)
+  principal = each.key
+  permissions = ["SELECT"]
+  table {
+    database_name = var.database_sor
+    name = var.tabela_sor
+  }
+}
+
+resource "aws_lakeformation_permissions" "database_permissions_sot_consumer" {
+  for_each = toset(var.lista_consumidores)
+  principal = each.key
+  permissions = ["SELECT"]
+  table {
+    database_name = var.database_sot
+    name = var.tabela_sot
+  }
+}
+
+resource "aws_lakeformation_permissions" "database_permissions_spec_consumer" {
+  for_each = toset(var.lista_consumidores)
+  principal = each.key
+  permissions = ["SELECT"]
+  table {
+    database_name = var.database_spec
+    name = var.tabela_spec
   }
 }
