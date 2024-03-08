@@ -6,10 +6,6 @@ variable "producer_role_arn_mesh" {
   type = string
 }
 
-variable "consumer_role_arn_mesh" {
-  type = string
-}
-
 variable "sor_s3_bucket" {
   type = string
 }

@@ -1,6 +1,5 @@
 control_account = "850202893763"
 producer_role_arn_mesh = "arn:aws:iam::850202893763:role/RoleProducerDMA"
-consumer_role_arn_mesh = "arn:aws:iam::850202893763:role/RoleConsumerDMA"
 sor_s3_bucket = "s3://corp-sor-sa-east-1-850202893763"
 sot_s3_bucket = "s3://corp-sot-sa-east-1-850202893763"
 spec_s3_bucket = "s3://corp-spec-sa-east-1-850202893763"
@@ -20,5 +19,6 @@ lista_consumidores = [
     "arn:aws:iam::850202893763:user/natalia_dreher",
     "arn:aws:iam::850202893763:user/scarlet_amaral",
     "arn:aws:iam::850202893763:user/usuario_teste",
-    "arn:aws:iam::850202893763:user/vanessa_vieira"
+    "arn:aws:iam::850202893763:user/vanessa_vieira",
+    "arn:aws:iam::850202893763:role/RoleConsumerDMA"
     ]
