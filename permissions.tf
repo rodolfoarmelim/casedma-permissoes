@@ -55,7 +55,7 @@ resource "aws_lakeformation_permissions" "database_permissions_spec_producer" {
   }
 }
 
-resource "aws_lakeformation_permissions" "database_permissions_sor_producer" {
+resource "aws_lakeformation_permissions" "table_permission_sor_producer" {
   principal = var.producer_role_arn_mesh
   permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
   table {
@@ -64,7 +64,7 @@ resource "aws_lakeformation_permissions" "database_permissions_sor_producer" {
   }
 }
 
-resource "aws_lakeformation_permissions" "database_permissions_sot_producer" {
+resource "aws_lakeformation_permissions" "table_permission_sot_producer" {
   principal = var.producer_role_arn_mesh
   permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
   table {
@@ -73,7 +73,7 @@ resource "aws_lakeformation_permissions" "database_permissions_sot_producer" {
   }
 }
 
-resource "aws_lakeformation_permissions" "database_permissions_spec_producer" {
+resource "aws_lakeformation_permissions" "table_permission_spec_producer" {
   principal = var.producer_role_arn_mesh
   permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
   table {
@@ -82,7 +82,7 @@ resource "aws_lakeformation_permissions" "database_permissions_spec_producer" {
   }
 }
 
-resource "aws_lakeformation_permissions" "database_permissions_sor_consumer" {
+resource "aws_lakeformation_permissions" "table_permission_sor_consumer" {
   for_each = toset(var.lista_consumidores)
   principal = each.key
   permissions = ["SELECT"]
@@ -92,7 +92,7 @@ resource "aws_lakeformation_permissions" "database_permissions_sor_consumer" {
   }
 }
 
-resource "aws_lakeformation_permissions" "database_permissions_sot_consumer" {
+resource "aws_lakeformation_permissions" "table_permission_sot_consumer" {
   for_each = toset(var.lista_consumidores)
   principal = each.key
   permissions = ["SELECT"]
@@ -102,7 +102,7 @@ resource "aws_lakeformation_permissions" "database_permissions_sot_consumer" {
   }
 }
 
-resource "aws_lakeformation_permissions" "database_permissions_spec_consumer" {
+resource "aws_lakeformation_permissions" "table_permission_spec_consumer" {
   for_each = toset(var.lista_consumidores)
   principal = each.key
   permissions = ["SELECT"]
