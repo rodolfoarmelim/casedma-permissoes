@@ -41,10 +41,6 @@ jobs:
           AWS_BUCKET_KEY_NAME: ${{ secrets.AWS_BUCKET_KEY_NAME }}
         run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${AWS_BUCKET_KEY_NAME}" -backend-config="region=${AWS_REGION}"
 
-      - name: Terraform Apply Tables
+      - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -target = "module.tables"
-
-        - name: Terraform Apply Permissions
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -target = "module.permissions"
+        run: terraform apply -auto-approve -input=false
