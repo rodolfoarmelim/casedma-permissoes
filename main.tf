@@ -1,4 +1,4 @@
-
+module "tables" {
 resource "aws_glue_catalog_table" "tabela_sor" {
   name            = var.tabela_sor
   database_name   = var.database_sor
@@ -292,7 +292,9 @@ resource "aws_glue_catalog_table" "tabela_spec" {
     }
   }
 }
+}
 
+module "permissions" {
 resource "aws_lakeformation_permissions" "describe_sor" {
     principal   = var.producer_role_arn_mesh
     permissions = ["DESCRIBE", "CREATE_TABLE"]
@@ -405,4 +407,5 @@ resource "aws_lakeformation_permissions" "table_permission_spec_consumer" {
     database_name = var.database_spec
     name = var.tabela_spec
   }
+}
 }
