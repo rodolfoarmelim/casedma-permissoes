@@ -1,4 +1,3 @@
-
 resource "aws_glue_catalog_table" "tabela_sor" {
   name            = var.tabela_sor
   database_name   = var.database_sor
@@ -293,9 +292,10 @@ resource "aws_glue_catalog_table" "tabela_spec" {
   }
 }
 
-resource "aws_lakeformation_permissions" "describe_sor" {
+resource "aws_lakeformation_permissions" "database_permission_sor" {
+    depends_on = ["aws_glue_catalog_table.tabela_sor"]
     principal   = var.producer_role_arn_mesh
-    permissions = ["DESCRIBE", "CREATE_TABLE"]
+    permissions = ["DESCRIBE", "CREATE_TABLE", "DROP"]
 
     database {
       name       = var.database_sor
@@ -303,9 +303,10 @@ resource "aws_lakeformation_permissions" "describe_sor" {
     }
 }
 
-resource "aws_lakeformation_permissions" "describe_sot" {
+resource "aws_lakeformation_permissions" "database_permision_sot" {
+    depends_on = ["aws_glue_catalog_table.tabela_sot"]
     principal   = var.producer_role_arn_mesh
-    permissions = ["DESCRIBE", "CREATE_TABLE"]
+    permissions = ["DESCRIBE", "CREATE_TABLE", "DROP"]
 
     database {
         name       = var.database_sot
@@ -313,9 +314,10 @@ resource "aws_lakeformation_permissions" "describe_sot" {
     }
 }
 
-resource "aws_lakeformation_permissions" "describe_spec" {
+resource "aws_lakeformation_permissions" "database_permission_spec" {
+    depends_on = ["aws_glue_catalog_table.tabela_spec"]
     principal   = var.producer_role_arn_mesh
-    permissions = ["DESCRIBE", "CREATE_TABLE"]
+    permissions = ["DESCRIBE", "CREATE_TABLE", "DROP"]
 
     database {
         name       = var.database_spec
@@ -323,7 +325,8 @@ resource "aws_lakeformation_permissions" "describe_spec" {
     }
 }
 
-resource "aws_lakeformation_permissions" "database_permissions_sor_producer" {
+resource "aws_lakeformation_permissions" "table_permissions_sor_producer" {
+  depends_on =["aws_glue_catalog_table.tabela_sor"]
   principal = var.producer_role_arn_mesh
   permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
   table {
@@ -332,7 +335,8 @@ resource "aws_lakeformation_permissions" "database_permissions_sor_producer" {
   }
 }
 
-resource "aws_lakeformation_permissions" "database_permissions_sot_producer" {
+resource "aws_lakeformation_permissions" "table_permissions_sot_producer" {
+  depends_on =["aws_glue_catalog_table.tabela_sot"]
   principal = var.producer_role_arn_mesh
   permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
   table {
@@ -341,34 +345,8 @@ resource "aws_lakeformation_permissions" "database_permissions_sot_producer" {
   }
 }
 
-resource "aws_lakeformation_permissions" "database_permissions_spec_producer" {
-  principal = var.producer_role_arn_mesh
-  permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
-  table {
-    database_name = var.database_spec
-    name = var.tabela_spec
-  }
-}
-
-resource "aws_lakeformation_permissions" "table_permission_sor_producer" {
-  principal = var.producer_role_arn_mesh
-  permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
-  table {
-    database_name = var.database_sor
-    name = var.tabela_sor
-  }
-}
-
-resource "aws_lakeformation_permissions" "table_permission_sot_producer" {
-  principal = var.producer_role_arn_mesh
-  permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
-  table {
-    database_name = var.database_sot
-    name = var.tabela_sot
-  }
-}
-
-resource "aws_lakeformation_permissions" "table_permission_spec_producer" {
+resource "aws_lakeformation_permissions" "table_permissions_spec_producer" {
+  depends_on =["aws_glue_catalog_table.tabela_spec"]
   principal = var.producer_role_arn_mesh
   permissions = ["SELECT", "INSERT", "ALTER", "DROP"]
   table {
@@ -378,6 +356,7 @@ resource "aws_lakeformation_permissions" "table_permission_spec_producer" {
 }
 
 resource "aws_lakeformation_permissions" "table_permission_sor_consumer" {
+  depends_on =["aws_glue_catalog_table.tabela_sor"]
   for_each = toset(var.lista_consumidores)
   principal = each.key
   permissions = ["SELECT"]
@@ -388,6 +367,7 @@ resource "aws_lakeformation_permissions" "table_permission_sor_consumer" {
 }
 
 resource "aws_lakeformation_permissions" "table_permission_sot_consumer" {
+  depends_on =["aws_glue_catalog_table.tabela_sot"]
   for_each = toset(var.lista_consumidores)
   principal = each.key
   permissions = ["SELECT"]
@@ -398,6 +378,7 @@ resource "aws_lakeformation_permissions" "table_permission_sot_consumer" {
 }
 
 resource "aws_lakeformation_permissions" "table_permission_spec_consumer" {
+  depends_on =["aws_glue_catalog_table.tabela_spec"]
   for_each = toset(var.lista_consumidores)
   principal = each.key
   permissions = ["SELECT"]
