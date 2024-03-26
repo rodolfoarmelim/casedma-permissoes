@@ -27,3 +27,5 @@ resource "aws_lakeformation_permissions" "database_permission_spec" {
         catalog_id = var.control_account
     }
 }
+
+
