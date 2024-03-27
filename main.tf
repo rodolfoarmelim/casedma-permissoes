@@ -82,7 +82,7 @@ resource "aws_glue_catalog_table" "tabela_sor" {
 
     columns {
         name           = "amt"
-        type           = "decimal(18, 2)"
+        type           = "decimal(18,2)"
     }
 
     columns {
@@ -122,12 +122,12 @@ resource "aws_glue_catalog_table" "tabela_sor" {
 
     columns {
         name           = "lat"
-        type           = "decimal(18, 3)"
+        type           = "decimal(18,3)"
     }
 
     columns {
         name           = "long"
-        type           = "decimal(18, 3)"
+        type           = "decimal(18,3)"
     }
 
     columns {
@@ -157,12 +157,12 @@ resource "aws_glue_catalog_table" "tabela_sor" {
 
     columns {
         name           = "merch_lat"
-        type           = "decimal(18, 3)"
+        type           = "decimal(18,3)"
     }
 
     columns {
         name           = "merch_long"
-        type           = "decimal(18, 3)"
+        type           = "decimal(18,3)"
     }
 
     columns {
